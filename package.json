@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "draft-js": "^0.11.7",
     "froala-editor": "^4.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-draft-wysiwyg": "^1.15.0",
     "react-froala-wysiwyg": "^4.1.4",
     "slate": "^0.101.4",
     "slate-react": "^0.101.3"
