@@ -73,6 +73,21 @@ export default function App() {
                 H4: 'Heading 4',
                 buttonsVisible: 2,
               },
+              moreMisc: {
+                buttons: [
+                  'undo',
+                  'redo',
+                  'fullscreen',
+                  'print',
+                  'getPDF',
+                  'spellChecker',
+                  'selectAll',
+                  'html',
+                  'help',
+                ],
+                align: 'right',
+                buttonsVisible: 2,
+              },
               paragraphFormatSelection: true,
             },
           }}
