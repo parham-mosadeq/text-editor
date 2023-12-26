@@ -9,16 +9,29 @@ import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/js/languages/fa.js';
 import './App.css';
 
+<<<<<<< HEAD
 import { ChangeEvent, useRef, useState } from 'react';
+=======
+import { useEffect, useRef, useState } from 'react';
+>>>>>>> c4690b233fb4d855926d186cf6516105b14b7fd1
 import { DateBtn } from './plugins/DateBtn';
 import { DynamicFields } from './plugins/DynamicFileds';
 
 export default function App() {
   const [model, setModel] = useState();
+<<<<<<< HEAD
   const [modalValue, setModalValue] = useState('');
 
   const editorRef = useRef();
 
+=======
+  const [showModal, setShowModal] = useState(false);
+  const [dynamicValue, setDynamicValue] = useState('');
+
+  const editorRef = useRef();
+
+  useEffect(() => {}, [dynamicValue]);
+>>>>>>> c4690b233fb4d855926d186cf6516105b14b7fd1
   FroalaJS.DefineIcon('insertDate', { NAME: 'calendar' });
   FroalaJS.RegisterCommand('insertDate', {
     title: 'Insert Date',
@@ -29,6 +42,7 @@ export default function App() {
     callback: () => new DateBtn(editorRef).handleClick(),
   });
 
+<<<<<<< HEAD
   const handleDynamicVals = (event) => {
     console.log(modalValue,'2');
     console.log(event);
@@ -45,6 +59,8 @@ export default function App() {
   };
   // console.log(modalValue);
 
+=======
+>>>>>>> c4690b233fb4d855926d186cf6516105b14b7fd1
   FroalaJS.DefineIcon('dynamicFields', { NAME: 'fields' });
   FroalaJS.RegisterCommand('dynamicFields', {
     title: 'Dynamic Fileds',
@@ -53,6 +69,7 @@ export default function App() {
     undo: true,
     refreshAfterCallback: true,
     callback: () => {
+<<<<<<< HEAD
       new DynamicFields({
         editorRef,
         modalValue,
@@ -62,6 +79,20 @@ export default function App() {
     },
   });
 
+=======
+      setShowModal(true);
+    },
+  });
+
+  const handleDynamicVals = () => {
+    setShowModal(false);
+    new DynamicFields({
+      editorRef,
+      dynamicValue,
+    }).handleClick();
+    setDynamicValue('');
+  };
+>>>>>>> c4690b233fb4d855926d186cf6516105b14b7fd1
   return (
     <div className='container'>
       <div>text editor </div>
@@ -153,17 +184,29 @@ export default function App() {
             },
           }}
         />
+<<<<<<< HEAD
         {/* {showModal && (
           <div className='dynamic-input_handler'>
             <input
               value={modalValue}
               onChange={(e) => setModalValue(e.target.value)}
+=======
+        {showModal && (
+          <div className='dynamic-input_handler'>
+            <input
+              value={dynamicValue}
+              onChange={(e) => setDynamicValue(e.target.value)}
+>>>>>>> c4690b233fb4d855926d186cf6516105b14b7fd1
             />
             <button type='submit' onClick={handleDynamicVals}>
               submit
             </button>
           </div>
+<<<<<<< HEAD
         )} */}
+=======
+        )}
+>>>>>>> c4690b233fb4d855926d186cf6516105b14b7fd1
       </div>
     </div>
   );

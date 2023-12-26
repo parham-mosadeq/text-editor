@@ -14,6 +14,7 @@
 }
 
 .dynamic_field-span {
+<<<<<<< HEAD
   background-color: rgb(200, 200, 200);
   min-width: 10px;
   min-height: 10px;
@@ -34,4 +35,28 @@
   color: white;
   width: fit-content;
   height: 15px;
+=======
+  background-color: gray;
+  min-width: 10px;
+  min-height: 10px;
+  color: white;
+  display: block;
+  max-width: fit-content;
+}
+
+.dynamic-input_handler {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 0 3rem;
+  border-radius: 7px;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: gray;
+  width: fit-content;
+  height: 100px;
+>>>>>>> c4690b233fb4d855926d186cf6516105b14b7fd1
 }
