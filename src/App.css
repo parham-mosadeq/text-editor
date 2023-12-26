@@ -1,5 +1,5 @@
 .container {
-  min-width: 600px;
+  width: 700px;
   height: 300px;
   margin: 2rem;
   margin-top: 7rem;
@@ -7,4 +7,31 @@
 
 .editor hr {
   page-break-after: always;
+}
+
+.editor {
+  position: relative;
+}
+
+.dynamic_field-span {
+  background-color: rgb(200, 200, 200);
+  min-width: 10px;
+  min-height: 10px;
+  color: white;
+  display: inline-block;
+  max-width: fit-content;
+  min-width: 50px;
+  height: 20px;
+  margin: 0 0.4rem;
+  padding: 2px 4px;
+  border: 2px dashed;
+}
+
+.dynamic-input_handler {
+  display: inline;
+  padding: 2px;
+  background-color: #666666;
+  color: white;
+  width: fit-content;
+  height: 15px;
 }
