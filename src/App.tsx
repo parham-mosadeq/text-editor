@@ -9,7 +9,7 @@ import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/js/languages/fa.js';
 import './App.css';
 
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { DateBtn } from './plugins/DateBtn';
 import { DynamicContent } from './plugins/DynamicFileds';
 
@@ -59,7 +59,7 @@ export default function App() {
           model={model}
           onModelChange={setModel}
           config={{
-            placeholderText: 'بنویسید...',
+            placeholderText: 'ب نویسید...',
             language: 'fa',
             charCounterCount: true,
             toolbarButtons: {

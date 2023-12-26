@@ -21,16 +21,25 @@ export class DynamicContent extends React.Component {
   // get all nodes
 
   handleClick() {
-    const div = document.createElement('input');
+    const input = document.createElement('input');
 
-    div.contentEditable = 'true';
-    div.classList.add('dynamic_field-span');
-    div.addEventListener('input', (event) => this.props.handleContent(event));
-    div.setAttribute('name', this.props.content);
+    input.contentEditable = 'true';
+    input.classList.add('dynamic_field-span');
+    input.addEventListener('input', (event) => this.props.handleContent(event));
+    input.setAttribute('name', this.props.content);
 
-    this.node?.anchorNode?.parentElement?.appendChild(div);
+    if (this.node?.anchorNode?.nodeName === 'TD') {
+      this.node?.anchorNode?.appendChild(document.createElement('p'));
+      this.node?.anchorNode.firstChild?.appendChild(input);
+      // this.node?.anchorNode?.;
 
-    console.log(this.props.content, 'content 2');
+      console.log(123);
+      console.log(this.node?.anchorNode.lastChild);
+    }
+
+    this.node?.anchorNode?.parentElement?.appendChild(input);
+
+    // console.log(this.props.content, 'content 2');
     console.log(this.node?.anchorNode);
   }
 }
