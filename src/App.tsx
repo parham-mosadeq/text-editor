@@ -11,13 +11,22 @@ import './App.css';
 
 import { ChangeEvent, useRef, useState } from 'react';
 import { DateBtn } from './plugins/DateBtn';
-import { DynamicFields } from './plugins/DynamicFileds';
+import { DynamicContent } from './plugins/DynamicFileds';
 
 export default function App() {
   const [model, setModel] = useState();
-  const [modalValue, setModalValue] = useState('');
+  const [content, setContent] = useState('');
 
+  function handleContent(event: ChangeEvent<HTMLInputElement>) {
+    setContent(event.target.value);
+    console.log(content, 'content 1');
+  }
   const editorRef = useRef();
+  const dy = new DynamicContent({
+    editorRef,
+    content,
+    handleContent,
+  });
 
   FroalaJS.DefineIcon('insertDate', { NAME: 'calendar' });
   FroalaJS.RegisterCommand('insertDate', {
@@ -29,36 +38,15 @@ export default function App() {
     callback: () => new DateBtn(editorRef).handleClick(),
   });
 
-  const handleDynamicVals = (event) => {
-    console.log(modalValue, '2');
-    console.log(event);
-    new DynamicFields({
-      editorRef,
-      modalValue,
-    }).handleClick();
-    setModalValue('');
-  };
-
-  const handleModalVal = (event: ChangeEvent<HTMLInputElement>) => {
-    setModalValue(event.target.value);
-    console.log(modalValue, '1');
-  };
-  // console.log(modalValue);
-
-  FroalaJS.DefineIcon('dynamicFields', { NAME: 'fields' });
-  FroalaJS.RegisterCommand('dynamicFields', {
+  FroalaJS.DefineIcon('DynamicContent', { NAME: 'fields' });
+  FroalaJS.RegisterCommand('DynamicContent', {
     title: 'Dynamic Fileds',
     icon: 'DF',
     focus: true,
     undo: true,
     refreshAfterCallback: true,
     callback: () => {
-      new DynamicFields({
-        editorRef,
-        modalValue,
-        onChange: handleDynamicVals,
-        handleModalVal,
-      }).openModal();
+      dy.handleClick();
     },
   });
 
@@ -90,7 +78,7 @@ export default function App() {
                   'inlineClass',
                   'inlineStyle',
                   'clearFormatting',
-                  'dynamicFields',
+                  'DynamicContent',
                 ],
               },
               moreParagraph: {
