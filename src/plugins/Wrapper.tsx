@@ -8,8 +8,8 @@ export class Wrapper {
 
     wrapper.innerHTML = content;
 
-    console.log(content);
+    // console.log(content);
     if (froalaContainer) froalaContainer.appendChild(wrapper);
-    console.log(froalaContainer);
+    // console.log(froalaContainer);
   }
 }

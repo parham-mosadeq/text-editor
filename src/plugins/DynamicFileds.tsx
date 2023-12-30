@@ -10,7 +10,7 @@ import React, { ChangeEvent, MutableRefObject } from 'react';
 interface DynamicContentProps {
   content: string;
   editorRef: MutableRefObject<Node | undefined>;
-  handleContent: (event?: ChangeEvent<HTMLDivElement>) => void;
+  handleContent: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export class DynamicContent extends React.Component {
@@ -35,7 +35,7 @@ export class DynamicContent extends React.Component {
 
     if (this.node?.anchorNode?.nodeName === 'TD') {
       this.node?.anchorNode.parentElement?.appendChild(input);
-      console.log(this.node?.anchorNode.parentElement?.innerText);
+      // console.log(this.node?.anchorNode.parentElement?.innerText);
     }
 
     this.node?.anchorNode?.parentElement?.appendChild(input);

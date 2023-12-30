@@ -1,5 +1,7 @@
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import FroalaEditor from 'react-froala-wysiwyg';
 import FroalaJS from 'froala-editor';
+import './App.css';
 
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
@@ -7,32 +9,45 @@ import 'froala-editor/js/plugins.pkgd.min.js';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/js/languages/fa.js';
-import './App.css';
 
-import { ChangeEvent, useRef, useState } from 'react';
 import { DateBtn } from './plugins/DateBtn';
 import { DynamicContent } from './plugins/DynamicFileds';
 import { Header } from './plugins/Header';
 import { Footer } from './plugins/Footer';
+import { Pagination } from './plugins/Pagination';
+import { Border } from './plugins/Border';
 
 export default function App() {
   const [model, setModel] = useState();
   const [content, setContent] = useState('');
-  const [border, setBorder] = useState('');
   const [isBorder, setIsBorder] = useState(false);
-
-  function handleContent(event: ChangeEvent<HTMLInputElement>) {
-    setContent(event.target.value);
-  }
+  const [borderWidth, setBorderWidth] = useState('');
+  const [borderStyle, setBorderStyle] = useState('');
+  const [borderColor, setBorderColor] = useState('');
 
   const editorRef = useRef();
+
+  const totalPages = Pagination();
+  console.log(totalPages);
+
   const dy = new DynamicContent({
     editorRef,
     content,
     handleContent,
   });
+  const insetBorder = new Border();
 
-  FroalaJS.DefineIcon('Footer', { NAME: 'calendar' });
+  useEffect(() => {
+    isBorder
+      ? insetBorder.addBorder(borderColor, borderStyle, borderWidth)
+      : '';
+  }, [borderColor, borderStyle, borderWidth]);
+
+  function handleContent(event: ChangeEvent<HTMLInputElement>) {
+    setContent(event.target.value);
+  }
+
+  FroalaJS.DefineIcon('Footer', { NAME: 'footer' });
   FroalaJS.RegisterCommand('Footer', {
     title: 'Footer',
     icon: 'footer',
@@ -41,7 +56,7 @@ export default function App() {
     refreshAfterCallback: true,
     callback: () => new Footer().addFooter(),
   });
-  FroalaJS.DefineIcon('Header', { NAME: 'calendar' });
+  FroalaJS.DefineIcon('Header', { NAME: 'header' });
   FroalaJS.RegisterCommand('Header', {
     title: 'Header',
     icon: 'header',
@@ -50,7 +65,7 @@ export default function App() {
     refreshAfterCallback: true,
     callback: () => new Header().addHeader(),
   });
-  FroalaJS.DefineIcon('insertDate', { NAME: 'calendar' });
+  FroalaJS.DefineIcon('insertDate', { NAME: 'inset persian date' });
   FroalaJS.RegisterCommand('insertDate', {
     title: 'Insert Date',
     icon: 'تاریخ فارسی',
@@ -59,7 +74,7 @@ export default function App() {
     refreshAfterCallback: true,
     callback: () => new DateBtn(editorRef).handleClick(),
   });
-  FroalaJS.DefineIcon('insertBorder', { NAME: 'calendar' });
+  FroalaJS.DefineIcon('insertBorder', { NAME: 'inset border' });
   FroalaJS.RegisterCommand('insertBorder', {
     title: 'Insert Border',
     icon: 'border',
@@ -67,11 +82,11 @@ export default function App() {
     undo: true,
     refreshAfterCallback: true,
     callback: () => {
-      setIsBorder(!isBorder);
+      setIsBorder(true);
     },
   });
 
-  FroalaJS.DefineIcon('DynamicContent', { NAME: 'fields' });
+  FroalaJS.DefineIcon('DynamicContent', { NAME: 'dynamic content' });
   FroalaJS.RegisterCommand('DynamicContent', {
     title: 'Dynamic Fileds',
     icon: 'DF',
@@ -177,21 +192,52 @@ export default function App() {
             },
           }}
         />
+        {isBorder && (
+          <div className='border-modal'>
+            <button onClick={() => setIsBorder(false)}>X</button>
+            <input
+              type='color'
+              value={borderColor}
+              onChange={(e) => setBorderColor(e.target.value)}
+            />
+            <input
+              type='number'
+              placeholder='border width'
+              value={borderWidth}
+              onChange={(e) => setBorderWidth(e.target.value)}
+            />
+
+            <select
+              value={borderStyle}
+              onChange={(e) => setBorderStyle(e.target.value)}
+              name='borderStyles'
+              id='borderStyles'
+            >
+              <option value='solid'>solid</option>
+              <option value='dashed'>dashed</option>
+              <option value='dotted'>dotted</option>
+              <option value='rage'>rage</option>
+              <option value='double'>double</option>
+              <option value='groove'>groove</option>
+              <option value='ridge'>ridge</option>
+              <option value='outset'>outset</option>
+            </select>
+          </div>
+        )}
       </div>
       <div>
-        <h1>preview</h1>
-        {isBorder && (
-          <input value={border} onChange={(e) => setBorder(e.target.value)} />
-        )}
-        <div
+        {/* <h1>preview</h1> */}
+
+        {/* <div
           style={{
             border,
             padding: '5px ',
           }}
           dir='rtl'
           className='preview'
-          dangerouslySetInnerHTML={{ __html: model }}
-        ></div>
+          dangerouslySetInnerHTML={{ __html: model! }}
+        ></div> */}
+        {/* <span>{totalPages}</span> */}
       </div>
     </div>
   );
