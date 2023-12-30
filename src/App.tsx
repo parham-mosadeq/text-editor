@@ -12,6 +12,7 @@ import './App.css';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { DateBtn } from './plugins/DateBtn';
 import { DynamicContent } from './plugins/DynamicFileds';
+import { Border } from './plugins/Border';
 
 export default function App() {
   const [model, setModel] = useState();
@@ -19,8 +20,8 @@ export default function App() {
 
   function handleContent(event: ChangeEvent<HTMLInputElement>) {
     setContent(event.target.value);
-    console.log(content, 'content 1');
   }
+
   const editorRef = useRef();
   const dy = new DynamicContent({
     editorRef,
@@ -49,6 +50,9 @@ export default function App() {
       dy.handleClick();
     },
   });
+
+  const div = new Border();
+  div.addBorder();
 
   return (
     <div className='container'>

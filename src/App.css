@@ -35,3 +35,16 @@
   width: fit-content;
   height: 15px;
 }
+
+/* .page-border {
+  border: 3px solid red;
+} */
+
+/* @media print {
+  .fr-element {
+    border: 3px solid red;
+  }
+  body {
+    background-color: blue;
+  }
+} */
