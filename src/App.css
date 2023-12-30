@@ -27,24 +27,27 @@
   border: 2px dashed;
 }
 
-.dynamic-input_handler {
-  display: inline;
-  padding: 2px;
-  background-color: #666666;
-  color: white;
-  width: fit-content;
-  height: 15px;
+.header,
+.footer {
+  width: 100%;
+  height: fit-content;
+  background-color: #eee;
 }
 
-/* .page-border {
-  border: 3px solid red;
-} */
+.preview table {
+  border: 1px solid gray;
+}
+.preview td {
+  border: 1px solid gray !important;
+}
 
-/* @media print {
-  .fr-element {
-    border: 3px solid red;
+.preview hr {
+  page-break-after: always;
+}
+
+@media print {
+  .header,
+  .footer {
+    background-color: transparent;
   }
-  body {
-    background-color: blue;
-  }
-} */
+}

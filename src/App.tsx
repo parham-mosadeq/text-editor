@@ -9,14 +9,17 @@ import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/js/languages/fa.js';
 import './App.css';
 
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { DateBtn } from './plugins/DateBtn';
 import { DynamicContent } from './plugins/DynamicFileds';
-import { Border } from './plugins/Border';
+import { Header } from './plugins/Header';
+import { Footer } from './plugins/Footer';
 
 export default function App() {
   const [model, setModel] = useState();
   const [content, setContent] = useState('');
+  const [border, setBorder] = useState('');
+  const [isBorder, setIsBorder] = useState(false);
 
   function handleContent(event: ChangeEvent<HTMLInputElement>) {
     setContent(event.target.value);
@@ -29,6 +32,24 @@ export default function App() {
     handleContent,
   });
 
+  FroalaJS.DefineIcon('Footer', { NAME: 'calendar' });
+  FroalaJS.RegisterCommand('Footer', {
+    title: 'Footer',
+    icon: 'footer',
+    focus: true,
+    undo: true,
+    refreshAfterCallback: true,
+    callback: () => new Footer().addFooter(),
+  });
+  FroalaJS.DefineIcon('Header', { NAME: 'calendar' });
+  FroalaJS.RegisterCommand('Header', {
+    title: 'Header',
+    icon: 'header',
+    focus: true,
+    undo: true,
+    refreshAfterCallback: true,
+    callback: () => new Header().addHeader(),
+  });
   FroalaJS.DefineIcon('insertDate', { NAME: 'calendar' });
   FroalaJS.RegisterCommand('insertDate', {
     title: 'Insert Date',
@@ -37,6 +58,17 @@ export default function App() {
     undo: true,
     refreshAfterCallback: true,
     callback: () => new DateBtn(editorRef).handleClick(),
+  });
+  FroalaJS.DefineIcon('insertBorder', { NAME: 'calendar' });
+  FroalaJS.RegisterCommand('insertBorder', {
+    title: 'Insert Border',
+    icon: 'border',
+    focus: true,
+    undo: true,
+    refreshAfterCallback: true,
+    callback: () => {
+      setIsBorder(!isBorder);
+    },
   });
 
   FroalaJS.DefineIcon('DynamicContent', { NAME: 'fields' });
@@ -51,12 +83,9 @@ export default function App() {
     },
   });
 
-  const div = new Border();
-  div.addBorder();
-
   return (
     <div className='container'>
-      <div>text editor </div>
+      <h1>text editor </h1>
       <div className='editor'>
         <FroalaEditor
           ref={editorRef}
@@ -83,13 +112,14 @@ export default function App() {
                   'inlineStyle',
                   'clearFormatting',
                   'DynamicContent',
+                  'insertBorder',
                 ],
               },
               moreParagraph: {
                 buttons: [
-                  'alignLeft',
-                  'alignCenter',
                   'alignRight',
+                  'alignCenter',
+                  'alignLeft',
                   'formatOL',
                   'formatUL',
                   'outdent',
@@ -137,6 +167,8 @@ export default function App() {
                   'html',
                   'help',
                   'insertDate',
+                  'Footer',
+                  'Header',
                 ],
                 align: 'right',
                 buttonsVisible: 2,
@@ -145,6 +177,21 @@ export default function App() {
             },
           }}
         />
+      </div>
+      <div>
+        <h1>preview</h1>
+        {isBorder && (
+          <input value={border} onChange={(e) => setBorder(e.target.value)} />
+        )}
+        <div
+          style={{
+            border,
+            padding: '5px ',
+          }}
+          dir='rtl'
+          className='preview'
+          dangerouslySetInnerHTML={{ __html: model }}
+        ></div>
       </div>
     </div>
   );
