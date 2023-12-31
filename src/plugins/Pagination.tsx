@@ -7,7 +7,6 @@ export const Pagination = () => {
 
   numberContainer.classList.add('page-number_span');
 
-  console.log(lineBreaks);
   const totalPages = lineBreaks?.length + 1 || 1;
 
   useMemo(() => {

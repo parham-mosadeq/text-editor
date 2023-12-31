@@ -14,7 +14,6 @@ import { DateBtn } from './plugins/DateBtn';
 import { DynamicContent } from './plugins/DynamicFileds';
 import { Header } from './plugins/Header';
 import { Footer } from './plugins/Footer';
-import { Pagination } from './plugins/Pagination';
 import { Border } from './plugins/Border';
 
 export default function App() {
@@ -26,9 +25,6 @@ export default function App() {
   const [borderColor, setBorderColor] = useState('');
 
   const editorRef = useRef();
-
-  const totalPages = Pagination();
-  console.log(totalPages);
 
   const dy = new DynamicContent({
     editorRef,
@@ -42,6 +38,8 @@ export default function App() {
       ? insetBorder.addBorder(borderColor, borderStyle, borderWidth)
       : '';
   }, [borderColor, borderStyle, borderWidth]);
+
+  useEffect(() => {}, [content]);
 
   function handleContent(event: ChangeEvent<HTMLInputElement>) {
     setContent(event.target.value);
@@ -107,7 +105,7 @@ export default function App() {
           model={model}
           onModelChange={setModel}
           config={{
-            placeholderText: 'ب نویسید...',
+            // placeholderText: 'ب نویسید...',
             language: 'fa',
             charCounterCount: true,
             toolbarButtons: {
@@ -224,20 +222,6 @@ export default function App() {
             </select>
           </div>
         )}
-      </div>
-      <div>
-        {/* <h1>preview</h1> */}
-
-        {/* <div
-          style={{
-            border,
-            padding: '5px ',
-          }}
-          dir='rtl'
-          className='preview'
-          dangerouslySetInnerHTML={{ __html: model! }}
-        ></div> */}
-        {/* <span>{totalPages}</span> */}
       </div>
     </div>
   );

@@ -8,8 +8,7 @@ export class Header {
     header.classList.add('header');
     header.contentEditable = 'true';
     header.innerText = 'header';
-    // console.log(container[0].firstChild);
-    // container && container[0].appendChild(header);
+
     container && container[0]?.firstElementChild?.replaceWith(header);
   }
 }

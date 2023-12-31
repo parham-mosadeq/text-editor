@@ -13,7 +13,7 @@
   position: relative;
 }
 
-.dynamic_field-span {
+.dynamic_field-input {
   background-color: rgb(200, 200, 200);
   width: 45px;
   height: 45px;
@@ -64,19 +64,13 @@
   font-size: 12px;
 }
 
-.content-border {
-  border: 3px solid gray;
-  width: fit-content;
-  height: fit-content;
-  margin: 0 auto;
-  padding: 10px;
-}
-
+ 
 .border-modal {
-  width: 50%;
-  height: 40%;
+  width: 320px;
+  height: 100px;
   display: flex;
   margin: 0 auto;
+  padding: 5px;
   justify-content: center;
   align-items: center;
   gap: 4px;
@@ -88,6 +82,10 @@
   border-radius: 7px;
   box-shadow: 0 10px 5px rgba(0, 0, 0, 0.5);
   background-color: #f1f1f1;
+}
+
+.fr-wrapper {
+  padding: 7px;
 }
 
 @media print {
