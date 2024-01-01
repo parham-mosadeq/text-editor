@@ -1,6 +1,6 @@
 .container {
   width: 700px;
-  height: 300px;
+  height: 500px;
   margin: 2rem;
   margin-top: 7rem;
 }
@@ -64,7 +64,6 @@
   font-size: 12px;
 }
 
- 
 .border-modal {
   width: 320px;
   height: 100px;
@@ -86,6 +85,24 @@
 
 .fr-wrapper {
   padding: 7px;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.fr-element {
+  position: relative !important;
+  overflow: hidden !important;
+}
+.verticalText {
+  position: absolute;
+  margin: 0;
+  padding: 3px;
+  border: 2px dashed #f1f1f1;
+  background-color: #eee;
+  transform: rotate(90deg);
+  min-width: 25px;
+  min-height: 25px;
+  z-index: 10;
 }
 
 @media print {

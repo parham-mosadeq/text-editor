@@ -16,6 +16,7 @@ import { Header } from './plugins/Header';
 import { Footer } from './plugins/Footer';
 import { Border } from './plugins/Border';
 import { PageBreak } from './plugins/PageBreak';
+import { VerticalText } from './plugins/VerticalText';
 
 export default function App() {
   const [model, setModel] = useState();
@@ -55,6 +56,24 @@ export default function App() {
     setContent(event.target.value);
   }
 
+  FroalaJS.DefineIcon('verticalText', { NAME: 'vertical text' });
+  FroalaJS.RegisterCommand('verticalText', {
+    title: 'verticalText',
+    icon: 'vertical Text',
+    focus: true,
+    undo: true,
+    refreshAfterCallback: true,
+    callback: () => new VerticalText().addVerticalText(),
+  });
+  FroalaJS.DefineIcon('pageHeight', { NAME: 'pageHeight' });
+  FroalaJS.RegisterCommand('pageHeight', {
+    title: 'pageHeight',
+    icon: 'Page Height',
+    focus: true,
+    undo: true,
+    refreshAfterCallback: true,
+    callback: () => console.log('Page Height'),
+  });
   FroalaJS.DefineIcon('Footer', { NAME: 'footer' });
   FroalaJS.RegisterCommand('Footer', {
     title: 'Footer',
@@ -136,6 +155,7 @@ export default function App() {
                   'clearFormatting',
                   'DynamicContent',
                   'insertBorder',
+                  'verticalText',
                 ],
               },
               moreParagraph: {
@@ -152,6 +172,7 @@ export default function App() {
                   'paragraphStyle',
                   'lineHeight',
                   'alignJustify',
+                  'pageHeight',
                 ],
               },
               moreRich: {
