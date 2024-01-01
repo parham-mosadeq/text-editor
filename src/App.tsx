@@ -15,6 +15,7 @@ import { DynamicContent } from './plugins/DynamicFileds';
 import { Header } from './plugins/Header';
 import { Footer } from './plugins/Footer';
 import { Border } from './plugins/Border';
+import { PageBreak } from './plugins/PageBreak';
 
 export default function App() {
   const [model, setModel] = useState();
@@ -23,14 +24,23 @@ export default function App() {
   const [borderWidth, setBorderWidth] = useState('');
   const [borderStyle, setBorderStyle] = useState('');
   const [borderColor, setBorderColor] = useState('');
+  const [pageHeight, setPageHeight] = useState(790);
 
   const editorRef = useRef();
+
+  const handlePageBreak = () => {
+    setPageHeight((prev) => (prev += 790));
+  };
+
+  const pageBreak = new PageBreak();
+  pageBreak.addPageBreak(pageHeight, handlePageBreak);
 
   const dy = new DynamicContent({
     editorRef,
     content,
     handleContent,
   });
+
   const insetBorder = new Border();
 
   useEffect(() => {
@@ -105,7 +115,7 @@ export default function App() {
           model={model}
           onModelChange={setModel}
           config={{
-            // placeholderText: 'ب نویسید...',
+            placeholderText: 'بنویسید ...',
             language: 'fa',
             charCounterCount: true,
             toolbarButtons: {

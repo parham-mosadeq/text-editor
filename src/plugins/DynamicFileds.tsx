@@ -1,12 +1,5 @@
 import React, { ChangeEvent, MutableRefObject } from 'react';
 
-// interface DynamicContentProps {
-//   modalValue?: string;
-//   editorRef: MutableRefObject<Node | undefined>;
-//   handleClick: () => void;
-//   handleDynamicVal: () => void;
-//   handleModalVal: (event: ChangeEvent<HTMLInputElement>) => void;
-// }
 interface DynamicContentProps {
   content: string;
   editorRef: MutableRefObject<Node | undefined>;
@@ -28,13 +21,11 @@ export class DynamicContent extends React.Component {
     // todo
 
     input.contentEditable = 'true';
+    input.innerText = 'edit here';
     input.classList.add('dynamic_field-input');
     input.addEventListener('input', (event) => this.props.handleContent(event));
     input.setAttribute('name', this.props.content);
 
-    if (this.node?.anchorNode?.parentElement) {
-      console.log(this.node?.anchorNode?.parentElement, 'bt');
-    }
     if (this.node?.anchorNode?.nodeName === 'TD') {
       this.node?.anchorNode.parentElement?.appendChild(input);
       // console.log(this.node?.anchorNode.parentElement?.innerText);
